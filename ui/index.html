@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tradutor</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Tradutor</h1>
+      <p class="sub">
+        Escreva um texto, escolha os idiomas e traduza. Use Ctrl+Enter para
+        enviar.
+      </p>
+
+      <div class="bar">
+        <div class="field">
+          <label for="from">Idioma de origem</label>
+          <select id="from"></select>
+        </div>
+        <button
+          id="swap"
+          type="button"
+          title="Trocar idiomas"
+          aria-label="Trocar idiomas"
+          disabled
+        >
+          ⇄
+        </button>
+        <div class="field">
+          <label for="to">Traduzir para</label>
+          <select id="to"></select>
+        </div>
+      </div>
+
+      <div class="panes">
+        <section class="pane">
+          <label for="text">Texto original</label>
+          <textarea
+            id="text"
+            placeholder="Digite ou cole o texto aqui"
+            maxlength="2000"
+          ></textarea>
+          <div class="row">
+            <span id="count">0/2000</span
+            ><button class="primary" id="go" type="button">Traduzir</button>
+          </div>
+        </section>
+        <section class="pane">
+          <span class="label" style="font-size: 14px; color: var(--muted)"
+            >Tradução</span
+          >
+          <div id="out" class="out empty" aria-live="polite">
+            A tradução aparece aqui.
+          </div>
+          <div class="row">
+            <span id="meta"></span
+            ><button class="ghost" id="copy" type="button">Copiar</button>
+          </div>
+        </section>
+      </div>
+    </main>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -8,12 +8,13 @@ let endpoint = "https://api.cognitive.microsofttranslator.com/";
 // required if you're using a multi-service or regional (not global) resource. It can be found in the Azure portal on the Keys and Endpoint page.
 let location = process.env.LOCATION;
 
-export async function translate(message){
+export async function translate(message,to,from){
 let params = new URLSearchParams();
 params.append("api-version", "3.0");
-params.append("from", "en");
-params.append("to", "sw");
-params.append("to", "it");
+if(from){
+params.append("from", from);
+}
+params.append("to", to);
 
 var response = await axios({
     baseURL: endpoint,
@@ -32,7 +33,6 @@ var response = await axios({
     }],
     responseType: 'json'
 }).then(function(response){
-    console.log(JSON.stringify(response.data, null, 4));
     return response.data
 })
 return response

@@ -11,8 +11,9 @@ const PORT = process.env.PORT || 3000;
 
 app.get('/translate/:message', async (req, res) => {
     try {
-        const message = req.params.message;
-        const result = await translate(message);
+        const params = req.params;
+        const { to, from } = req.query;
+        const result = await translate(params.message,to,from);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -22,5 +23,6 @@ app.get('/translate/:message', async (req, res) => {
 
 // ------------------- INICIAR SERVIDOR -------------------
 app.listen(PORT, () => {
+    app.use(express.static('../ui'));
     console.log(`Servidor rodando na porta ${PORT}`);
 });
