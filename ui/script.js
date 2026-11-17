@@ -49,10 +49,19 @@ go.addEventListener("click", translateNow);
 
 $("swap").addEventListener("click", () => {
   if (!fromSel.value) return;
-  [fromSel.value, toSel.value] = [toSel.value, fromSel.value];
-  if (out.dataset.result) {
-    text.value = out.dataset.result;
+
+  const oldFrom = fromSel.value;
+  const oldTo = toSel.value;
+  const original = text.value;
+  const translated = out.dataset.result;
+
+  fromSel.value = oldTo;
+  toSel.value = oldFrom;
+
+  if (translated) {
+    text.value = translated;
     text.dispatchEvent(new Event("input"));
+    show(original);
   }
 });
 
@@ -108,6 +117,7 @@ async function translateNow() {
     if (!res.ok)
       throw new Error(data.error || `Erro ${res.status} no servidor.`);
     const { text: translated, detected } = parse(data);
+
     show(translated);
     const name = LANGS.find(([c]) => c === detected)?.[1] || detected;
     const parts = [];
